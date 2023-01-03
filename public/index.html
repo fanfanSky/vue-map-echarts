@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta name="renderer" content="webkit">
+    <meta charset="utf-8">
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+      <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+<!--     built files will be auto injected -->
+<!--    <script type="text/javascript" src='http://webapi.amap.com/maps?v=1.4.11&key=35a871e5905ecfd749bd998448b9cd03'></script>-->
+<!--    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=35a871e5905ecfd749bd998448b9cd03&plugin=AMap.DistrictSearch"></script>-->
+<!--     UI组件库 1.0 -->
+<!--    <script src="http://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>-->
+<!--     built files will be auto injected -->
+    <script>
+        // console.log(window.navigator.userAgent);
+        // if (window.navigator.userAgent.indexOf('Trident') != -1) {
+        //     alert('360兼容模式');
+        // }
+        // if (window.navigator.userAgent.indexOf('AppleWebKit') != -1) {
+        //     alert('360极速模式');
+        // }
+        getBrowserType();
+        function getBrowserType() {
+            var alertTitle = 'IE浏览器或360兼容模式支持性较差，推荐使用360安全浏览器极速模式，Firefox或Chrome';
+            // 取得浏览器的userAgent字符串
+            var userAgent = navigator.userAgent;
+            // 判断是否为小于IE11的浏览器
+            var isLessIE11 = userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1;
+            // 判断是否为IE的Edge浏览器
+            var isEdge = userAgent.indexOf('Edge') > -1 && !isLessIE11;
+            // 判断是否为IE11浏览器
+            var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf('rv:11.0') > -1;
+            if (isLessIE11) {
+                var IEReg = new RegExp('MSIE (\\d+\\.\\d+);');
+                // 正则表达式匹配浏览器的userAgent字符串中MSIE后的数字部分，，这一步不可省略！！！
+                IEReg.test(userAgent);
+                // 取正则表达式中第一个小括号里匹配到的值
+                var IEVersionNum = parseFloat(RegExp['$1']);
+                if (IEVersionNum === 7) {
+                    alert(alertTitle);
+                    // IE7
+                    return 7
+                } else if (IEVersionNum === 8) {
+                    alert(alertTitle);
+                    // IE8
+                    return 8
+                } else if (IEVersionNum === 9) {
+                    alert(alertTitle);
+                    // IE9
+                    return 9
+                } else if (IEVersionNum === 10) {
+                    alert(alertTitle);
+                    // IE10
+                    return 10
+                } else {
+                    // IE版本<7
+                    alert(alertTitle);
+                    return -1
+                }
+            } else if (isEdge) {
+                // edge
+                alert('Edge浏览器支持性较差，推荐使用360安全浏览器极速模式，Firefox或Chrome');
+                return 'edge'
+            } else if (isIE11) {
+                // IE11
+                alert(alertTitle);
+                return 11
+            } else {
+                // 不是ie浏览器
+                // return -1;
+                if (userAgent.indexOf("Opera") > -1) {
+                    return "Opera";
+                }
+                if (userAgent.indexOf("Firefox") > -1) {
+                    return "Firefox";
+                }
+                if (userAgent.indexOf("Chrome") > -1) {
+                    return "Chrome";
+                }
+                if (userAgent.indexOf("Safari") > -1) {
+                    return "Safari";
+                }
+                if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1) {
+                    alert(alertTitle);
+                    return 5;
+                }
+                if (userAgent.indexOf("Trident") > -1) {
+                    alert(alertTitle);
+                    return 6;
+                }
+            }
+
+        }
+    </script>
+  </body>
+</html>
